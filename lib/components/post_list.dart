@@ -37,8 +37,10 @@ class _PostListState extends State<PostList> {
         child: CircularProgressIndicator(),
       );
 
-    return ListView(
-      children: entries.map((entry) => PostEntry(post: entry)).toList(),
+    return RefreshIndicator(
+      child: ListView(
+          children: entries.map((entry) => PostEntry(post: entry)).toList()),
+      onRefresh: () => postProvider.fetchData(),
     );
   }
 }

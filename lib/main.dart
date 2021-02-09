@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Dcard Demo',
       theme: ThemeData(
+        primaryColor: Color(0xFF3397CF),
         appBarTheme: AppBarTheme(
           color: Color(0xFF006AA6),
         ),
