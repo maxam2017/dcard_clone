@@ -30,7 +30,7 @@ class _PostListState extends State<PostList> {
     final postProvider = Provider.of<PostProvider>(context);
     final entries = postProvider.entries;
 
-    if (postProvider.loading)
+    if (postProvider.loading && !postProvider.fetched)
       return Container(
         padding: const EdgeInsets.all(16),
         alignment: Alignment.topCenter,
@@ -38,8 +38,15 @@ class _PostListState extends State<PostList> {
       );
 
     return RefreshIndicator(
-      child: ListView(
-          children: entries.map((entry) => PostEntry(post: entry)).toList()),
+      child: ListView.builder(
+          itemCount: entries.length,
+          itemBuilder: (context, index) {
+            if (index == entries.length - 5) {
+              postProvider.fetchData();
+            }
+
+            return PostEntry(post: entries[index]);
+          }),
       onRefresh: () => postProvider.fetchData(),
     );
   }
