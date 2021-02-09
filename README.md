@@ -1,16 +1,29 @@
-# dcard_clone
+<p align="center">
+  <h3 align="center">dcard_clone</h3>
+</p>
 
-A new Flutter project.
+<p align="center">
+   <img src="https://img.shields.io/badge/language-Dart-00B4AB?style"/>
+   <img src="https://img.shields.io/github/license/maxam2017/dcard_clone"/>
+</p>
+<p align="center">
+   a dcard app clone implemented by flutter
+</p>
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Screenshot
 
-A few resources to get you started if this is your first Flutter project:
+<img src='https://i.imgur.com/O4pxvsZ.png' height='500'>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Implementation
+✅ simple post feed
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+⛔ rich media layout
+
+⛔ full post page
+
+> ✅ implemented; ⛔ not yet
+
+## Architecture
+abide by `provider`'s dataflow.
