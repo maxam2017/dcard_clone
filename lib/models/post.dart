@@ -10,6 +10,9 @@ class PostModel {
   bool withNickname;
   bool withImages;
   List<MediaMeta> mediaMeta;
+  int likeCount;
+  int commentCount;
+  List<Reaction> reactions;
 
   PostModel(
       {this.id,
@@ -22,7 +25,10 @@ class PostModel {
       this.withNickname,
       this.department,
       this.withImages,
-      this.mediaMeta});
+      this.mediaMeta,
+      this.reactions,
+      this.likeCount,
+      this.commentCount});
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
     return PostModel(
@@ -37,7 +43,11 @@ class PostModel {
         department: json['department'],
         withImages: json['withImages'],
         mediaMeta: new List<MediaMeta>.from(
-            json['mediaMeta'].map((i) => MediaMeta.fromJson(i))));
+            json['mediaMeta'].map((i) => MediaMeta.fromJson(i))),
+        likeCount: json['likeCount'],
+        commentCount: json['commentCount'],
+        reactions: new List<Reaction>.from(
+            json['reactions'].map((i) => Reaction.fromJson(i))));
   }
 }
 
@@ -47,5 +57,13 @@ class MediaMeta {
 
   factory MediaMeta.fromJson(Map<String, dynamic> json) {
     return MediaMeta(thumbnail: json['thumbnail']);
+  }
+}
+
+class Reaction {
+  String id;
+  Reaction({this.id});
+  factory Reaction.fromJson(Map<String, dynamic> json) {
+    return Reaction(id: json['id']);
   }
 }
