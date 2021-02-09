@@ -75,6 +75,7 @@ class _PostWidgetState extends State<PostEntry> {
                 Row(
                   children: [
                     Flexible(
+                      fit: FlexFit.tight,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
