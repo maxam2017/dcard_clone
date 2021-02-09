@@ -1,13 +1,17 @@
+import 'package:dcard_clone/providers/index.dart';
 import 'package:dcard_clone/routes.dart';
 import 'package:dcard_clone/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: providers,
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

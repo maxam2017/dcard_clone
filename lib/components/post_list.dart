@@ -13,6 +13,7 @@ class _PostListState extends State<PostList> {
   void initState() {
     super.initState();
     final postProvider = Provider.of<PostProvider>(context, listen: false);
+    if (postProvider.entries.length > 0) return;
     postProvider.fetchData();
   }
 
