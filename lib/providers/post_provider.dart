@@ -16,7 +16,6 @@ class PostProvider with ChangeNotifier {
         ? '$POST_API_ENDPOINT?popular=true'
         : '$POST_API_ENDPOINT?popular=true&before=${entries[entries.length - 1].id}';
 
-    print(endpoint);
     final payload = await api.fetch(endpoint);
     Iterable list = payload;
     entries = [

@@ -57,7 +57,7 @@ class _PostWidgetState extends State<PostEntry> {
                         radius: 10,
                         backgroundColor:
                             Color(gender == 'M' ? 0xFF006EA5 : 0xFFCB3A6B),
-                        child: withNickname
+                        child: (withNickname && gender != 'D')
                             ? Text(department[0].toUpperCase(),
                                 style: TextStyle(
                                   fontSize: 14,
