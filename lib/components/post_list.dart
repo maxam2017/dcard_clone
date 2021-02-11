@@ -14,21 +14,24 @@ class _PostListState extends State<PostList> {
   void initState() {
     super.initState();
     final postProvider = Provider.of<PostProvider>(context, listen: false);
-    if (postProvider.entries.length == 0) {
-      postProvider.fetchData();
+    if (postProvider.indices.length == 0) {
+      postProvider.listPost({
+        "popular": true,
+      });
     }
 
     final reactionProvider =
         Provider.of<ReactionProvider>(context, listen: false);
     if (!reactionProvider.fetched) {
-      reactionProvider.fetchData();
+      reactionProvider.listReaction();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final postProvider = Provider.of<PostProvider>(context);
-    final entries = postProvider.entries;
+    final entries =
+        postProvider.indices.map((id) => postProvider.store[id]).toList();
 
     if (postProvider.loading && !postProvider.fetched)
       return Container(
@@ -42,12 +45,17 @@ class _PostListState extends State<PostList> {
           itemCount: entries.length,
           itemBuilder: (context, index) {
             if (index == entries.length - 5) {
-              postProvider.fetchData();
+              postProvider.listPost({
+                "popular": true,
+                "before": postProvider.indices.last,
+              });
             }
 
             return PostEntry(post: entries[index]);
           }),
-      onRefresh: () => postProvider.fetchData(),
+      onRefresh: () => postProvider.listPost({
+        "popular": true,
+      }),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:dcard_clone/models/post.dart';
+import 'package:dcard_clone/models/reaction.dart';
 import 'package:dcard_clone/providers/reaction_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -38,8 +39,9 @@ class _PostWidgetState extends State<PostEntry> {
     final department = widget.post.department;
     final withImages = widget.post.withImages ?? false;
     final mediaMeta = widget.post.mediaMeta;
-    final reactions =
-        widget.post.reactions.take(3).map((item) => reactionStore[item.id]);
+    final reactions = (reactionProvider.fetched && !reactionProvider.loading)
+        ? widget.post.reactions.take(3).map((item) => reactionStore[item.id])
+        : <ReactionModel>[];
     final likeCount = widget.post.likeCount.toString();
     final commentCount = widget.post.commentCount.toString();
 

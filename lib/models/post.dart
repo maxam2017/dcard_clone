@@ -46,8 +46,10 @@ class PostModel {
             json['mediaMeta'].map((i) => MediaMeta.fromJson(i))),
         likeCount: json['likeCount'],
         commentCount: json['commentCount'],
-        reactions: new List<Reaction>.from(
-            json['reactions'].map((i) => Reaction.fromJson(i))));
+        reactions: json['reactions']
+            .map((i) => Reaction.fromJson(i))
+            .toList()
+            .cast<Reaction>());
   }
 }
 
