@@ -5,18 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PostList extends StatefulWidget {
+  final popular;
+  PostList([this.popular]);
+
   @override
-  _PostListState createState() => _PostListState();
+  _PostListState createState() => _PostListState(this.popular);
 }
 
 class _PostListState extends State<PostList> {
+  final popular;
+  _PostListState([this.popular]);
+
   @override
   void initState() {
     super.initState();
     final postProvider = Provider.of<PostProvider>(context, listen: false);
     if (postProvider.indices.length == 0) {
       postProvider.listPost({
-        "popular": true,
+        "popular": this.popular,
       });
     }
 
@@ -46,7 +52,7 @@ class _PostListState extends State<PostList> {
           itemBuilder: (context, index) {
             if (index == entries.length - 5) {
               postProvider.listPost({
-                "popular": true,
+                "popular": this.popular,
                 "before": postProvider.indices.last,
               });
             }
@@ -54,7 +60,7 @@ class _PostListState extends State<PostList> {
             return PostEntry(post: entries[index]);
           }),
       onRefresh: () => postProvider.listPost({
-        "popular": true,
+        "popular": this.popular,
       }),
     );
   }

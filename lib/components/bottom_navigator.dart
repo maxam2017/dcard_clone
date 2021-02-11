@@ -67,21 +67,24 @@ class _BottomNavigationBarControllerState
   Widget build(BuildContext context) {
     return WillPopScope(
       child: Scaffold(
-        body: TabBarView(
-          controller: _tabController,
-          physics: NeverScrollableScrollPhysics(),
-          children: mainTabs,
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          items: bottomNavigationBarRootItems
-              .map((e) => e.bottomNavigationBarItem)
-              .toList(),
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-        ),
-      ),
+          body: TabBarView(
+            controller: _tabController,
+            physics: NeverScrollableScrollPhysics(),
+            children: mainTabs,
+          ),
+          bottomNavigationBar: Container(
+            child: BottomNavigationBar(
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              items: bottomNavigationBarRootItems
+                  .map((e) => e.bottomNavigationBarItem)
+                  .toList(),
+              currentIndex: _selectedIndex,
+              onTap: _onItemTapped,
+            ),
+            decoration: BoxDecoration(
+                border: Border(top: BorderSide(color: Colors.black12))),
+          )),
       onWillPop: () async {
         if (Navigator.of(navStack[_tabController.index]).canPop()) {
           Navigator.of(navStack[_tabController.index]).pop();
