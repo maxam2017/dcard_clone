@@ -1,19 +1,28 @@
-import 'package:dcard_clone/components/bottom_navigator.dart';
 import 'package:flutter/material.dart';
 
-class StoreScreen extends StatelessWidget {
+class StoreScreen extends StatefulWidget {
   static String routeName = "/store";
 
+  @override
+  _StoreScreenState createState() => _StoreScreenState();
+}
+
+class _StoreScreenState extends State<StoreScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Goods Clone'),
-        ),
-        body: Column(
-          children: [],
-        ),
-        bottomNavigationBar: BottomNavigator(
-          activeRotueName: '/store',
-        ));
+      appBar: AppBar(
+        title: Text('Goods Clone'),
+      ),
+      body: Column(
+        children: [],
+      ),
+    );
   }
 }
