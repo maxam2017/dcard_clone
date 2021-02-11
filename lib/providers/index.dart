@@ -5,5 +5,7 @@ import 'package:provider/single_child_widget.dart';
 
 List<SingleChildWidget> providers = [
   ChangeNotifierProvider<PostProvider>(create: (_) => PostProvider()),
-  ChangeNotifierProvider<ReactionProvider>(create: (_) => ReactionProvider(),)
+  ChangeNotifierProvider<ReactionProvider>(
+    create: (_) => ReactionProvider(),
+  )
 ];
