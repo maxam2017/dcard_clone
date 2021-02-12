@@ -1,29 +1,39 @@
+import 'package:dcard_clone/adapter/pagination.dart';
 import 'package:dcard_clone/components/post_entry.dart';
+import 'package:dcard_clone/models/post.dart';
 import 'package:dcard_clone/providers/post_provider.dart';
 import 'package:dcard_clone/providers/reaction_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PostList extends StatefulWidget {
-  final popular;
-  PostList([this.popular]);
+  final bool popular;
+  // final String query;
+  PostList({
+    this.popular,
+    // this.query,
+  });
 
   @override
-  _PostListState createState() => _PostListState(this.popular);
+  _PostListState createState() => _PostListState(popular: this.popular);
 }
 
 class _PostListState extends State<PostList> {
-  final popular;
-  _PostListState([this.popular]);
+  final bool popular;
+  _PostListState({this.popular});
+
+  Pagination<PostModel> pagination;
 
   @override
   void initState() {
     super.initState();
     final postProvider = Provider.of<PostProvider>(context, listen: false);
-    if (postProvider.indices.length == 0) {
-      postProvider.listPost({
-        "popular": this.popular,
-      });
+    final query = {
+      "popular": this.popular,
+    };
+    pagination = postProvider.selectPagination(query);
+    if (pagination.indices.length == 0) {
+      postProvider.listPost(query);
     }
 
     final reactionProvider =
@@ -36,10 +46,11 @@ class _PostListState extends State<PostList> {
   @override
   Widget build(BuildContext context) {
     final postProvider = Provider.of<PostProvider>(context);
-    final entries =
-        postProvider.indices.map((id) => postProvider.store[id]).toList();
+    final entries = postProvider.selectEntryList({
+      "popular": this.popular,
+    });
 
-    if (postProvider.loading && !postProvider.fetched)
+    if (pagination.loading && !pagination.fetched)
       return Container(
         padding: const EdgeInsets.all(16),
         alignment: Alignment.topCenter,
@@ -53,7 +64,7 @@ class _PostListState extends State<PostList> {
             if (index == entries.length - 5) {
               postProvider.listPost({
                 "popular": this.popular,
-                "before": postProvider.indices.last,
+                "before": pagination.indices.last,
               });
             }
 

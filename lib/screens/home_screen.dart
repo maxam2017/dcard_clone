@@ -1,5 +1,4 @@
 import 'package:dcard_clone/components/post_list.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -47,7 +46,12 @@ class _HomeScreenState extends State<HomeScreen>
                           Border(bottom: BorderSide(color: Colors.black12)))),
               Expanded(
                 child: TabBarView(
-                  children: [PostList(true), PostList(false)],
+                  children: [
+                    PostList(popular: true),
+                    PostList(
+                      popular: false,
+                    )
+                  ],
                 ),
               ),
             ],
