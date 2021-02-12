@@ -49,7 +49,6 @@ class _PostListState extends State<PostList> {
     final query = {
       "popular": this.popular,
     };
-    final pagination = postProvider.selectPagination(query);
     final entries = postProvider.selectEntryList(query);
 
     if (pagination.loading && !pagination.fetched)
@@ -74,7 +73,7 @@ class _PostListState extends State<PostList> {
           }),
       onRefresh: () => postProvider.listPost({
         "popular": this.popular,
-        // "refresh": true,
+        "refresh": true,
       }),
     );
   }

@@ -20,7 +20,7 @@ class PostProvider extends PaginationAdapter<PostModel> with ChangeNotifier {
       super.refreshPagination(query);
     }
 
-    await super.list('/_api/posts', query);
+    await super.list('/_api/posts', query..remove('refresh'));
     notifyListeners();
   }
 }
