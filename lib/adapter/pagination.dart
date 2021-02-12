@@ -89,4 +89,9 @@ class PaginationAdapter<T> {
 
     return pagination.indices.map((id) => store[id]).toList();
   }
+
+  void refreshPagination([Map<String, dynamic> query]) {
+    final paginationKey = query is Map ? this.getPaginationKey(query) : '';
+    paginations.remove(paginationKey);
+  }
 }

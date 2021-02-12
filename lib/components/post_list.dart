@@ -46,9 +46,11 @@ class _PostListState extends State<PostList> {
   @override
   Widget build(BuildContext context) {
     final postProvider = Provider.of<PostProvider>(context);
-    final entries = postProvider.selectEntryList({
+    final query = {
       "popular": this.popular,
-    });
+    };
+    final pagination = postProvider.selectPagination(query);
+    final entries = postProvider.selectEntryList(query);
 
     if (pagination.loading && !pagination.fetched)
       return Container(
@@ -72,6 +74,7 @@ class _PostListState extends State<PostList> {
           }),
       onRefresh: () => postProvider.listPost({
         "popular": this.popular,
+        // "refresh": true,
       }),
     );
   }

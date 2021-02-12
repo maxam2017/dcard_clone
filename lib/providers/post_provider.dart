@@ -16,6 +16,10 @@ class PostProvider extends PaginationAdapter<PostModel> with ChangeNotifier {
         );
 
   Future<void> listPost([Map<String, dynamic> query]) async {
+    if (query['refresh'] != null) {
+      super.refreshPagination(query);
+    }
+
     await super.list('/_api/posts', query);
     notifyListeners();
   }
