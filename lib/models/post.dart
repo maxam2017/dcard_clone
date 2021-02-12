@@ -31,25 +31,31 @@ class PostModel {
       this.commentCount});
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
+    final List<Reaction> reactions = json['reactions']
+        .map((i) => Reaction.fromJson(i))
+        .toList()
+        .cast<Reaction>();
+
     return PostModel(
-        id: json['id'],
-        title: json['title'],
-        excerpt: json['excerpt'],
-        forumAlias: json['forumAlias'],
-        forumName: json['forumName'],
-        gender: json['gender'],
-        school: json['school'],
-        withNickname: json['withNickname'],
-        department: json['department'],
-        withImages: json['withImages'],
-        mediaMeta: new List<MediaMeta>.from(
-            json['mediaMeta'].map((i) => MediaMeta.fromJson(i))),
-        likeCount: json['likeCount'],
-        commentCount: json['commentCount'],
-        reactions: json['reactions']
-            .map((i) => Reaction.fromJson(i))
-            .toList()
-            .cast<Reaction>());
+      id: json['id'],
+      title: json['title'],
+      excerpt: json['excerpt'],
+      forumAlias: json['forumAlias'],
+      forumName: json['forumName'],
+      gender: json['gender'],
+      school: json['school'],
+      withNickname: json['withNickname'],
+      department: json['department'],
+      withImages: json['withImages'],
+      mediaMeta: new List<MediaMeta>.from(
+          json['mediaMeta'].map((i) => MediaMeta.fromJson(i))),
+      likeCount: json['likeCount'],
+      commentCount: json['commentCount'],
+      reactions: reactions.length == 0
+          // FIXME: workaround for add default thumbnail if no any reaction
+          ? [Reaction(id: '286f599c-f86a-4932-82f0-f5a06f1eca03')]
+          : reactions,
+    );
   }
 }
 
