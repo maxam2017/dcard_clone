@@ -1,3 +1,4 @@
+import 'package:dcard_clone/components/classic_content.dart';
 import 'package:dcard_clone/models/post.dart';
 import 'package:dcard_clone/models/reaction.dart';
 import 'package:dcard_clone/providers/reaction_provider.dart';
@@ -30,15 +31,11 @@ class _PostWidgetState extends State<PostEntry> {
     final reactionProvider = Provider.of<ReactionProvider>(context);
     final reactionStore = reactionProvider.store;
 
-    final title = widget.post.title ?? '';
-    final excerpt = widget.post.excerpt ?? '';
     final forumName = widget.post.forumName ?? '';
     final gender = widget.post.gender ?? 'A';
     final withNickname = widget.post.withNickname ?? true;
     final school = widget.post.school ?? '匿名';
     final department = widget.post.department;
-    final withImages = widget.post.withImages ?? false;
-    final mediaMeta = widget.post.mediaMeta;
     final reactions = (reactionProvider.fetched && !reactionProvider.loading)
         ? widget.post.reactions.take(3).map((item) => reactionStore[item.id])
         : <ReactionModel>[];
@@ -74,54 +71,7 @@ class _PostWidgetState extends State<PostEntry> {
                         style: TextStyle(color: Colors.black54, fontSize: 15)),
                   ],
                 ),
-                Row(
-                  children: [
-                    Flexible(
-                      fit: FlexFit.tight,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8, bottom: 4),
-                            child: Text(
-                              title,
-                              maxLines: 2,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            excerpt,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Color(0xAA000000),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // thumbnail
-                    withImages
-                        ? Container(
-                            margin: EdgeInsets.only(left: 16),
-                            decoration: BoxDecoration(
-                                color: Colors.black12,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image(
-                                width: 72,
-                                height: 72,
-                                image: NetworkImage(mediaMeta[0].thumbnail),
-                                fit: BoxFit.cover,
-                              ),
-                            ))
-                        : Container()
-                  ],
-                ),
+                ClassicContent(post: widget.post),
                 Padding(
                     padding: EdgeInsets.only(top: 12),
                     child: Row(
