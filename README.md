@@ -14,7 +14,7 @@
 
 ## Screenshot
 
-<img src='https://i.imgur.com/O4pxvsZ.png' height='500'>
+<img src='https://i.imgur.com/SoyYbc9.png' height='500'>
 
 ## Implementation
 ✅ simple post feed
